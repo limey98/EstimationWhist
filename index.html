@@ -2,8 +2,18 @@
 <html>
     <head>
         <title>Estimation Whist Scoring</title>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <p>This is a test</p>
+        <div class="playerEntry">
+            <div class="players" data-bind="foreach: players">
+                <div class="player">
+                    <span data-bind="css: { checked: dealer }"></span>
+                    <input type="text" data-bind="value: name" />
+                    <button data-bind="click: $parent.deletePlayer">x</button>
+                </div>
+            </div>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js" data-main="js/main"></script>
     </body>
 </html>
