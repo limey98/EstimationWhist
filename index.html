@@ -2,16 +2,49 @@
 <html>
     <head>
         <title>Estimation Whist Scoring</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="playerEntry">
+        <div class="playerEntry" data-bind="css: { hidden: playing }">
+            <div class="header">
+                <span style="width: 34px;">Dealer</span>
+                <span style="width: 230px;">Player Name</span>
+                <span>Delete</span>
+                <span>Up</span>
+                <span>Down</span>
+            </div>
             <div class="players" data-bind="foreach: players">
                 <div class="player">
-                    <span data-bind="css: { checked: dealer }"></span>
+                    <span data-bind="css: { checked: dealer }, click: setDealer"></span>
                     <input type="text" data-bind="value: name" />
-                    <button data-bind="click: $parent.deletePlayer">x</button>
+                    <button class="material-icons" data-bind="click: $parent.deletePlayer, css: { disabled: $parent.players().length < 3 }">clear</button>
+                    <button class="material-icons" data-bind="click: $parent.playerUp, css: { disabled: $index() == 0 }">keyboard_arrow_up</button>
+                    <button class="material-icons" data-bind="click: $parent.playerDown, css: { disabled: $index() == $parent.players().length - 1 }">keyboard_arrow_down</button>
                 </div>
+            </div>
+            <button class="addPlayer" data-bind="click: addPlayer">Add Player</button>
+            <button class="startGame" data-bind="click: playing.bind(playing, true)">Start Game</button>
+        </div>
+        <div class="scoring">
+            <div class="scoreTable">
+                <div class="row">
+                    <div class="cell"></div>
+                    <!-- ko foreach: players -->
+                    <div class="cell">
+                        <div data-bind="text: name"></div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- ko foreach: new Array(15) -->
+                <div class="row">
+                    <div class="cell">
+                        <div><span data-bind="text: $index() < 8 ? 8 - $index() : $index() - 6"></span> Cards</div>
+                        <div data-bind="html: $parent.getSuit($index() % 5)"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
         </div>
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js" data-main="js/main"></script>

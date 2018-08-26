@@ -4,6 +4,29 @@
     background-color: #333;
     color: white;
     margin: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.playerEntry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #333;
+    transition: opacity linear 0.5s;
+}
+.playerEntry.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.playerEntry .header {
+    font-size: 0;
+}
+.playerEntry .header span {
+    display: inline-block;
+    text-align: center;
+    width: 40px;
+    font-size: 16px;
 }
 .player {
     font-size: 0;
@@ -20,23 +43,85 @@
     border-radius: 20px;
     box-sizing: border-box;
     position: relative;
+    margin: 0 5px;
+    cursor: pointer;
 }
 .player span.checked::after {
     content: "";
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     background-color: white;
     border-radius: 20px;
     position: absolute;
-    left: 3px;
-    top: 3px;
+    left: 4px;
+    top: 4px;
 }
 .player input {
     height: 30px;
+    width: 200px;
     background-color: #333;
     color: white;
     border: 1px solid white;
     box-sizing: border-box;
-    margin: 0 10px;
+    margin: 0 15px;
+    padding: 0 5px;
+}
+.player button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    margin: 0 5px;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+}
+.player button.disabled {
+    color: #777;
+    border-color: #777;
+    cursor: default;
+}
+.player button:not(.disabled):hover {
+    background-color: white;
+    color: #333;
+}
+.playerEntry > button {
+    width: 150px;
+    height: 30px;
+    border: 1px solid white;
+    margin: 5px 0;
+    background-color: transparent;
+    color: white;
+}
+.playerEntry > button:hover {
+    background-color: white;
+    color: #333;
+}
+.playerEntry .startGame {
+    margin-top: 30px;
+}
+.scoring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.scoreTable {
+    display: table;
+    border-collapse: collapse;
+}
+.scoreTable .row {
+    display: table-row;
+}
+.scoreTable .cell {
+    display: table-cell;
+    border: 1px solid white;
+    padding: 5px;
 }
